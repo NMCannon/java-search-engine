@@ -21,6 +21,8 @@ public class GUI extends JFrame implements ActionListener
 	private JButton button1;
 	private JPanel panel1;
 	private JFrame screen;
+	private String search_string;
+	private FileProcessor file_processor = new FileProcessor();
 	
 	  // Constructor
 
@@ -38,6 +40,7 @@ public class GUI extends JFrame implements ActionListener
 		   
 		   textfield1 = new JTextField("Search...");
 		   textfield1.setToolTipText("Enter word/phrase");
+		   textfield1.setColumns(20);
 		   textfield1.addActionListener(this);
 		   
 		   button1 = new JButton("Search");
@@ -58,12 +61,23 @@ public class GUI extends JFrame implements ActionListener
 		   screen.setVisible(true);
 	  }
 
-	  @Override
-	  public void actionPerformed(ActionEvent arg0) 
+	  public void actionPerformed(ActionEvent event) 
 	  {
-		  // TODO Auto-generated method stub
-		
+		  if (event.getSource()==button1)
+		  {
+			  search_string=textfield1.getText();
+			  file_processor.fileConnect("test.txt");
+			  if(file_processor.fileCheck(search_string)==true)
+			  {
+				  System.out.print("found string");
+			  }
+			  else
+			  {
+				  System.out.print("did not find string");
+			  }
+		  }
 	  }
+		
 	  
 	  
 }
