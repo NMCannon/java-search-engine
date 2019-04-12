@@ -15,6 +15,7 @@ public class FileProcessor
 	
 	public void fileConnect(String filename)
 	{
+		// Try connect to the passed file
 		try
 		{
 			file1 = new File(filename);
@@ -26,31 +27,35 @@ public class FileProcessor
 		}
 	}
 	
-	public boolean fileCheck(String search_string)
+	public int fileCheck(String search_string)
 	{
+		// Make scanner for the file
 		try
 		{
 			scanner1 = new Scanner(file1);
 			scanner1.useDelimiter(" ");
+			string_count=0;
+			
+			// While the file has another line put the lines in a string
 			while (scanner1.hasNextLine())
 			{
 				String token = scanner1.nextLine();
+				
+				// Check if the line in the file contains the user's entered string ignoring case
 				if(token.toLowerCase().contains((search_string.toLowerCase())))
 				{
+					// Count how many times the string appears
 					string_count++;
 				}
 			}
-			System.out.println(string_count);
+			System.out.print(string_count);
 			
+			
+			// Close scanner and return string count
 			if(string_count>0)
 			{
 				scanner1.close();
-				return true;
-			}
-			else
-			{
-				scanner1.close();
-				return false;
+				return string_count;
 			}
 		}
 		
@@ -59,6 +64,6 @@ public class FileProcessor
 			JOptionPane.showMessageDialog(null, "run time error " + e.getMessage());
 			System.out.println("\n\nrun time error " + e.getMessage());
 		}
-		return false;
+		return string_count;
 	}
 }

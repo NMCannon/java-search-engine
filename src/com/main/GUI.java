@@ -24,7 +24,9 @@ public class GUI extends JFrame implements ActionListener
 	private JFrame screen;
 	private String search_string;
 	private String file;
+	private int count;
 	private FileProcessor file_processor = new FileProcessor();
+	private Rank rank = new Rank();
 	
 	  // Constructor
 
@@ -40,6 +42,7 @@ public class GUI extends JFrame implements ActionListener
 		   
 		   JPanel panel1 = new JPanel();
 		   
+		   // Make textfields
 		   textfield1 = new JTextField("String...");
 		   textfield1.setToolTipText("Enter word/phrase");
 		   textfield1.setColumns(25);
@@ -50,17 +53,19 @@ public class GUI extends JFrame implements ActionListener
 		   textfield2.setColumns(25);
 		   textfield2.addActionListener(this);
 		   
-		   
+		   // Make buttons
 		   button1 = new JButton("Search all files");
 		   button1.addActionListener(this);
 		   
 		   button2 = new JButton("Search specific file");
 		   
+		   // Add textfields and buttons to the panel
 		   panel1.add(textfield1);
 		   panel1.add(button1);
 		   panel1.add(textfield2);
 		   panel1.add(button2);
 		   
+		   // Add panel to the screen frame
 		   screen.add(panel1);
 			
 		   // set the location of the screen  
@@ -75,34 +80,35 @@ public class GUI extends JFrame implements ActionListener
 
 	  public void actionPerformed(ActionEvent event) 
 	  {
+		  // If the user clicks the "Search all files button"
 		  if (event.getSource()==button1)
 		  {
 			  search_string=textfield1.getText();
 			  
 			  file_processor.fileConnect("test.txt");
-			  file_processor.fileCheck(search_string);
+			  count=file_processor.fileCheck(search_string);
+			  rank.resultRank(count, "file_1.txt");
 			  
 			  file_processor.fileConnect("file_2.txt");
-			  file_processor.fileCheck(search_string);
+			  count=file_processor.fileCheck(search_string);
+			  rank.resultRank(count, "file_2.txt");
 			  
 			  file_processor.fileConnect("file_3.txt");
-			  file_processor.fileCheck(search_string);
+			  count=file_processor.fileCheck(search_string);
+			  rank.resultRank(count, "file_3.txt");
+			  
+			  rank.displayRank();
 		  }
 		  
+		  // If the user clicks the "Search specific file button"
 		  if (event.getSource()==button2)
 		  {
 			  search_string=textfield1.getText();
 			  file=textfield2.getText();
 			  
 			  file_processor.fileConnect(file);
-			  if(file_processor.fileCheck(search_string)==true)
-			  {
-				  System.out.print("found string");
-			  }
-			  else
-			  {
-				  System.out.print("did not find string");
-			  }
+			  count=file_processor.fileCheck(search_string);
+			  rank.displayrankSpecific(count, file);
 		  }
 	  }
 		
