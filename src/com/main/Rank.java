@@ -13,15 +13,24 @@ public class Rank
 	
 	public void resultRank(int count, String file)
 	{
-		if(count>best_count)
+		// If the string count for the file is higher than the rest, shift everything down in rank
+		if(count>=best_count)
 		{
+			worst_count=mid_count;
+			worst_file=mid_file;
+			mid_count=best_count;
+			mid_file=best_file;
 			best_count=count;
 			best_file=file;
 		}
-		else if(count>worst_count)
+		
+		// If the string count is greater than the middle rank, shift bottom rank down
+		else if(count>mid_count)
 		{
+			worst_count=mid_count;
+			worst_file=mid_file;
 			mid_count=count;
-			best_file=file;
+			mid_file=file;
 		}
 		else
 		{
@@ -30,13 +39,19 @@ public class Rank
 		}
 	}
 	
+	// Display the results in order
 	public void displayRank()
 	{
 		JOptionPane.showMessageDialog(null, "File:"+best_file+"\nString occurences: "+best_count
 				+"\n\nFile: "+mid_file+"\nString occurences: "+mid_count
 				+"\n\nFile: "+worst_file+"\nString occurences: "+worst_count);
+		
+		best_count=0;
+		mid_count=0;
+		worst_count=0;
 	}
 	
+	// Display results for specific file
 	public void displayrankSpecific(int count, String file)
 	{
 		JOptionPane.showMessageDialog(null, "File: "+file+"\nString occurences: "+count);

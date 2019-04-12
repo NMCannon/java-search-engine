@@ -58,6 +58,7 @@ public class GUI extends JFrame implements ActionListener
 		   button1.addActionListener(this);
 		   
 		   button2 = new JButton("Search specific file");
+		   button2.addActionListener(this);
 		   
 		   // Add textfields and buttons to the panel
 		   panel1.add(textfield1);
@@ -103,6 +104,7 @@ public class GUI extends JFrame implements ActionListener
 		  // If the user clicks the "Search specific file button"
 		  if (event.getSource()==button2)
 		  {
+			  System.out.print("HIII");
 			  search_string=textfield1.getText();
 			  file=textfield2.getText();
 			  

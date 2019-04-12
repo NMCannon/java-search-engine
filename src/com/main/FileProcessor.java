@@ -48,7 +48,6 @@ public class FileProcessor
 					string_count++;
 				}
 			}
-			System.out.print(string_count);
 			
 			
 			// Close scanner and return string count
