@@ -17,11 +17,13 @@ import javax.swing.JTextField;
 public class GUI extends JFrame implements ActionListener
 {
 	private JTextField textfield1;
-	private JLabel label1;
+	private JTextField textfield2;
 	private JButton button1;
+	private JButton button2;
 	private JPanel panel1;
 	private JFrame screen;
 	private String search_string;
+	private String file;
 	private FileProcessor file_processor = new FileProcessor();
 	
 	  // Constructor
@@ -38,16 +40,26 @@ public class GUI extends JFrame implements ActionListener
 		   
 		   JPanel panel1 = new JPanel();
 		   
-		   textfield1 = new JTextField("Search...");
+		   textfield1 = new JTextField("String...");
 		   textfield1.setToolTipText("Enter word/phrase");
-		   textfield1.setColumns(20);
+		   textfield1.setColumns(25);
 		   textfield1.addActionListener(this);
 		   
-		   button1 = new JButton("Search");
+		   textfield2 = new JTextField("File name...");
+		   textfield2.setToolTipText("Enter file name");
+		   textfield2.setColumns(25);
+		   textfield2.addActionListener(this);
+		   
+		   
+		   button1 = new JButton("Search all files");
 		   button1.addActionListener(this);
+		   
+		   button2 = new JButton("Search specific file");
 		   
 		   panel1.add(textfield1);
 		   panel1.add(button1);
+		   panel1.add(textfield2);
+		   panel1.add(button2);
 		   
 		   screen.add(panel1);
 			
@@ -66,7 +78,23 @@ public class GUI extends JFrame implements ActionListener
 		  if (event.getSource()==button1)
 		  {
 			  search_string=textfield1.getText();
+			  
 			  file_processor.fileConnect("test.txt");
+			  file_processor.fileCheck(search_string);
+			  
+			  file_processor.fileConnect("file_2.txt");
+			  file_processor.fileCheck(search_string);
+			  
+			  file_processor.fileConnect("file_3.txt");
+			  file_processor.fileCheck(search_string);
+		  }
+		  
+		  if (event.getSource()==button2)
+		  {
+			  search_string=textfield1.getText();
+			  file=textfield2.getText();
+			  
+			  file_processor.fileConnect(file);
 			  if(file_processor.fileCheck(search_string)==true)
 			  {
 				  System.out.print("found string");

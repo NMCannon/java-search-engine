@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class FileProcessor 
 {
 	private File file1;
@@ -54,7 +56,8 @@ public class FileProcessor
 		
 		catch (FileNotFoundException e)
 		{
-			System.out.println("run time error " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "run time error " + e.getMessage());
+			System.out.println("\n\nrun time error " + e.getMessage());
 		}
 		return false;
 	}
