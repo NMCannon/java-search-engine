@@ -29,6 +29,7 @@ public class GUI extends JFrame implements ActionListener
 	private JButton button4;
 	private JButton button5;
 	private JTextArea textarea1;
+	private JTextArea textarea2;
 	private JPanel panel1;
 	private JFrame screen;
 	private String search_string;
@@ -87,6 +88,10 @@ public class GUI extends JFrame implements ActionListener
 		   textarea1.setEditable(false);
 		   textarea1.setVisible(false);
 		   
+		   textarea2 = new JTextArea();
+		   textarea2.setEditable(false);
+		   textarea2.setVisible(false);
+		   
 		   // Add textfields and buttons to the panel
 		   panel1.add(textfield1);
 		   panel1.add(button1);
@@ -96,6 +101,7 @@ public class GUI extends JFrame implements ActionListener
 		   panel1.add(button4);
 		   panel1.add(button5);
 		   panel1.add(textarea1);
+		   panel1.add(textarea2);
 		   
 		   // Add panel to the screen frame
 		   screen.add(panel1);
@@ -115,6 +121,8 @@ public class GUI extends JFrame implements ActionListener
 		  // If the user clicks the "Search" button
 		  if (event.getSource()==button1)
 		  {
+			  textarea2.setText(null);
+			  
 			  if(file_list.isEmpty())
 			  {
 				  JOptionPane.showMessageDialog(this, "Please add the files you would like to search through, to the file list");
@@ -126,7 +134,7 @@ public class GUI extends JFrame implements ActionListener
 				  count=file_processor.fileCheck(textfield1.getText());
 				  file.setCount(count);
 			  }
-			  rank.sortResults(file_list);
+			  rank.sortResults(file_list, textarea2);
 		  }
 		  
 		  // If the user clicks the "Add file" button
