@@ -49,13 +49,6 @@ public class FileProcessor
 				}
 			}
 			
-			
-			// Close scanner and return string count
-			if(string_count>0)
-			{
-				scanner1.close();
-				return string_count;
-			}
 		}
 		
 		catch (FileNotFoundException e)
@@ -63,6 +56,9 @@ public class FileProcessor
 			JOptionPane.showMessageDialog(null, "run time error " + e.getMessage());
 			System.out.println("\n\nrun time error " + e.getMessage());
 		}
+		
+		// Close scanner and return the string count
+		scanner1.close();
 		return string_count;
 	}
 }
